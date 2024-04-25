@@ -1,7 +1,6 @@
 import { Blog } from "../hooks";
 import { AppBar } from "./Appbar";
 import { Avatar } from "./BlogCard";
-import React from 'react';
 import PopupShow from "./PopupShow";
 
 export const FullBlog = ({ blog }: {blog: Blog}) => {
