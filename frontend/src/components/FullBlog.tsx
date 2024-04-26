@@ -2,8 +2,14 @@ import { Blog } from "../hooks";
 import { AppBar } from "./Appbar";
 import { Avatar } from "./BlogCard";
 import PopupShow from "./PopupShow";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
+import {  useLocation,useNavigate } from "react-router-dom";
 
 export const FullBlog = ({ blog }: {blog: Blog}) => {
+    const navigate=useNavigate();
+    const location = useLocation();
+    const postId = location.pathname.split('/').pop();
     return (
         <div>
             <AppBar />
@@ -45,7 +51,21 @@ export const FullBlog = ({ blog }: {blog: Blog}) => {
                     <button type="button" className="text-white bg-red-700 hover:bg-blue-800 focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" >Edit</button>
                 </div>
                 <div className="">
-                    <PopupShow />
+                    <button onClick={async()=>{
+                    
+                   await axios.delete(
+                    `${BACKEND_URL}/api/v1/blog/${postId}`,
+                    {
+                        headers: {
+                            Authorization: localStorage.getItem("token")
+                        }
+                    }
+                );
+                // Optionally, you can navigate to a different page after deletion
+                navigate('/blogs');
+                }}>
+                   <PopupShow/>
+                </button>
                 </div>           
             </div>
         </div>
