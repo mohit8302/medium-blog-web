@@ -24,9 +24,12 @@ export const FullBlog = ({ blog }: {blog: Blog}) => {
                      </div>
                      <div className="pt-4">
                          {/* Render each paragraph of the content */}
-                          {blog.content.split('\n').map((paragraph, index) => (
-                           <p key={index}>{paragraph}</p>
-                           ))}
+                         {blog.content.split('\n\n').map((paragraph, index) => (
+                          <div key={index}>
+                           <p>{paragraph}</p>
+                             {index < blog.content.split('\n\n').length - 1 && <br />} 
+                           </div>
+                          ))}
                       </div>
                     </div>
                     <div className="col-span-4">
