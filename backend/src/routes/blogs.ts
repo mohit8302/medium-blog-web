@@ -187,10 +187,10 @@ blogRouter.delete('/:id', async (c) => {
             return c.json({ message: "Blog not found" });
         }
 
-        // if (blog.authorId !== Number(authorId)) {
-        //     c.status(403);
-        //     return c.json({ message: "You are not authorized to delete this blog" });
-        // }
+        if (blog.authorId !== Number(authorId)) {
+            c.status(403);
+            return c.json({ message: "You are not authorized to delete this blog" });
+        }
 
         await prisma.blog.delete({
             where: {
